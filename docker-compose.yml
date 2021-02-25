@@ -5,15 +5,249 @@ services:
     image: postgres:13.2
     volumes:
       - "./data/postgres:/var/lib/postgresql"
-    expose:
-      - 5432
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_USER: opensanctions
       POSTGRES_PASSWORD: opensanctions
 
-  worker:
+  au_dfat_sanctions:
     build: .
-    command: opensanctions crawl us_ofac_sdn
+    command: opensanctions crawl au_dfat_sanctions
+    links:
+      - postgres
+    volumes:
+      - "./data/data:/data"
+      - "./opensanctions:/opensanctions/opensanctions"
+    tmpfs:
+      - "/tmp"
+    environment:
+      OPENSANCTIONS_DATABASE_URI: postgresql://opensanctions:opensanctions@postgres/opensanctions
+
+  ca_dfatd_sema_sanctions:
+    build: .
+    command: opensanctions crawl ca_dfatd_sema_sanctions
+    links:
+      - postgres
+    volumes:
+      - "./data/data:/data"
+      - "./opensanctions:/opensanctions/opensanctions"
+    tmpfs:
+      - "/tmp"
+    environment:
+      OPENSANCTIONS_DATABASE_URI: postgresql://opensanctions:opensanctions@postgres/opensanctions
+
+  ch_seco_sanctions:
+    build: .
+    command: opensanctions crawl ch_seco_sanctions
+    links:
+      - postgres
+    volumes:
+      - "./data/data:/data"
+      - "./opensanctions:/opensanctions/opensanctions"
+    tmpfs:
+      - "/tmp"
+    environment:
+      OPENSANCTIONS_DATABASE_URI: postgresql://opensanctions:opensanctions@postgres/opensanctions
+
+  coe_assembly:
+    build: .
+    command: opensanctions crawl coe_assembly
+    links:
+      - postgres
+    volumes:
+      - "./data/data:/data"
+      - "./opensanctions:/opensanctions/opensanctions"
+    tmpfs:
+      - "/tmp"
+    environment:
+      OPENSANCTIONS_DATABASE_URI: postgresql://opensanctions:opensanctions@postgres/opensanctions
+
+  eu_cor_members:
+    build: .
+    command: opensanctions crawl eu_cor_members
+    links:
+      - postgres
+    volumes:
+      - "./data/data:/data"
+      - "./opensanctions:/opensanctions/opensanctions"
+    tmpfs:
+      - "/tmp"
+    environment:
+      OPENSANCTIONS_DATABASE_URI: postgresql://opensanctions:opensanctions@postgres/opensanctions
+
+  eu_fsf:
+    build: .
+    command: opensanctions crawl eu_fsf
+    links:
+      - postgres
+    volumes:
+      - "./data/data:/data"
+      - "./opensanctions:/opensanctions/opensanctions"
+    tmpfs:
+      - "/tmp"
+    environment:
+      OPENSANCTIONS_DATABASE_URI: postgresql://opensanctions:opensanctions@postgres/opensanctions
+
+  eu_meps:
+    build: .
+    command: opensanctions crawl eu_meps
+    links:
+      - postgres
+    volumes:
+      - "./data/data:/data"
+      - "./opensanctions:/opensanctions/opensanctions"
+    tmpfs:
+      - "/tmp"
+    environment:
+      OPENSANCTIONS_DATABASE_URI: postgresql://opensanctions:opensanctions@postgres/opensanctions
+
+  everypolitician:
+    build: .
+    command: opensanctions crawl everypolitician
+    links:
+      - postgres
+    volumes:
+      - "./data/data:/data"
+      - "./opensanctions:/opensanctions/opensanctions"
+    tmpfs:
+      - "/tmp"
+    environment:
+      OPENSANCTIONS_DATABASE_URI: postgresql://opensanctions:opensanctions@postgres/opensanctions
+
+  fr_freezing_of_assets:
+    build: .
+    command: opensanctions crawl fr_freezing_of_assets
+    links:
+      - postgres
+    volumes:
+      - "./data/data:/data"
+      - "./opensanctions:/opensanctions/opensanctions"
+    tmpfs:
+      - "/tmp"
+    environment:
+      OPENSANCTIONS_DATABASE_URI: postgresql://opensanctions:opensanctions@postgres/opensanctions
+
+  gb_coh_disqualified:
+    build: .
+    command: opensanctions crawl gb_coh_disqualified
+    links:
+      - postgres
+    volumes:
+      - "./data/data:/data"
+      - "./opensanctions:/opensanctions/opensanctions"
+    tmpfs:
+      - "/tmp"
+    environment:
+      OPENSANCTIONS_DATABASE_URI: postgresql://opensanctions:opensanctions@postgres/opensanctions
+
+  gb_hmt_sanctions:
+    build: .
+    command: opensanctions crawl gb_hmt_sanctions
+    links:
+      - postgres
+    volumes:
+      - "./data/data:/data"
+      - "./opensanctions:/opensanctions/opensanctions"
+    tmpfs:
+      - "/tmp"
+    environment:
+      OPENSANCTIONS_DATABASE_URI: postgresql://opensanctions:opensanctions@postgres/opensanctions
+
+  interpol_api:
+    build: .
+    command: opensanctions crawl interpol_api
+    links:
+      - postgres
+    volumes:
+      - "./data/data:/data"
+      - "./opensanctions:/opensanctions/opensanctions"
+    tmpfs:
+      - "/tmp"
+    environment:
+      OPENSANCTIONS_DATABASE_URI: postgresql://opensanctions:opensanctions@postgres/opensanctions
+
+  kg_fiu_national:
+    build: .
+    command: opensanctions crawl kg_fiu_national
+    links:
+      - postgres
+    volumes:
+      - "./data/data:/data"
+      - "./opensanctions:/opensanctions/opensanctions"
+    tmpfs:
+      - "/tmp"
+    environment:
+      OPENSANCTIONS_DATABASE_URI: postgresql://opensanctions:opensanctions@postgres/opensanctions
+
+  ua_sfms_blacklist:
+    build: .
+    command: opensanctions crawl ua_sfms_blacklist
+    links:
+      - postgres
+    volumes:
+      - "./data/data:/data"
+      - "./opensanctions:/opensanctions/opensanctions"
+    tmpfs:
+      - "/tmp"
+    environment:
+      OPENSANCTIONS_DATABASE_URI: postgresql://opensanctions:opensanctions@postgres/opensanctions
+
+  un_sc_sanctions:
+    build: .
+    command: opensanctions crawl un_sc_sanctions
+    links:
+      - postgres
+    volumes:
+      - "./data/data:/data"
+      - "./opensanctions:/opensanctions/opensanctions"
+    tmpfs:
+      - "/tmp"
+    environment:
+      OPENSANCTIONS_DATABASE_URI: postgresql://opensanctions:opensanctions@postgres/opensanctions
+
+  us_bis_denied:
+    build: .
+    command: opensanctions crawl us_bis_denied
+    links:
+      - postgres
+    volumes:
+      - "./data/data:/data"
+      - "./opensanctions:/opensanctions/opensanctions"
+    tmpfs:
+      - "/tmp"
+    environment:
+      OPENSANCTIONS_DATABASE_URI: postgresql://opensanctions:opensanctions@postgres/opensanctions
+
+  us_cia_world_leaders:
+    build: .
+    command: opensanctions crawl us_cia_world_leaders
+    links:
+      - postgres
+    volumes:
+      - "./data/data:/data"
+      - "./opensanctions:/opensanctions/opensanctions"
+    tmpfs:
+      - "/tmp"
+    environment:
+      OPENSANCTIONS_DATABASE_URI: postgresql://opensanctions:opensanctions@postgres/opensanctions
+
+  us_ofac:
+    build: .
+    command: opensanctions crawl us_ofac
+    links:
+      - postgres
+    volumes:
+      - "./data/data:/data"
+      - "./opensanctions:/opensanctions/opensanctions"
+    tmpfs:
+      - "/tmp"
+    environment:
+      OPENSANCTIONS_DATABASE_URI: postgresql://opensanctions:opensanctions@postgres/opensanctions
+
+  worldbank_debarred:
+    build: .
+    command: opensanctions crawl worldbank_debarred
     links:
       - postgres
     volumes:
